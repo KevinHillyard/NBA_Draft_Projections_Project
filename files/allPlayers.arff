@@ -1,22 +1,22 @@
-@relation allPlayers.csv
-@attribute Position {SF, SG, PF, G, F, PG, C, FC, GF}
+@relation allPlayers
+@attribute Position { SF, SG, PF, G, F, PG, C, FC, GF }
 @attribute Height integer
 @attribute Weight integer
 @attribute PPG real
 @attribute 3pt_percent real
 @attribute FG_percent real
 @attribute FT_percent real
-@attribute League {NCAA_DI, GLEAGUE, Adelaide, Bandirma_Kirmizi, All_Teams, Panathinaikos, NAIA, UCAM_Murcia_CB}
+@attribute League { NCAA_DI, GLEAGUE, Adelaide, Bandirma_Kirmizi, All_Teams, Panathinaikos, NAIA, UCAM_Murcia_CB }
 @attribute Steals real
 @attribute TOV real
 @attribute Assits real
-@attribute Off-Rebount real
-@attribute Def-Rebound real
+@attribute Off_Rebount real
+@attribute Def_Rebound real
 @attribute Blocks real
 @attribute Fouls real
 @attribute Age integer
-@attribute Nation {United_States, Australia, Democratic_Republic_of_the_Congo, Germany, Canada, Canada_/_Dominican_Republic, Turkey, Bahamas, Spain, Lithuania, Portugal, France, Serbia, Nigeria_/_United_States, Georgia, United_States_/_Serbia, Greece, United_States_/_Dominican_Republic, Haiti_/_France, United_States_/_Puerto_Rico, Greece_/_Nigeria, Georgia_/_Austria}
-@attribute Draft Position integer
+@attribute Nation { United_States, Australia, Democratic_Republic_of_the_Congo, Germany, Canada, Canada_/_Dominican_Republic, Turkey, Bahamas, Spain, Lithuania, Portugal, France, Serbia, Nigeria_/_United_States, Georgia, United_States_/_Serbia, Greece, United_States_/_Dominican_Republic, Haiti_/_France, United_States_/_Puerto_Rico, Greece_/_Nigeria, Georgia_/_Austria }
+@attribute Draft_Position integer
 @data
 SF,198,100,20.15,0.4,0.438,0.846,NCAA_DI,1.59,4.04,3.48,0.7,5.48,0.78,2.48,19,United_States,1
 SG,198,81,17.93,0.365,0.461,0.829,GLEAGUE,1.53,2.67,2.8,0.53,3.53,0.27,1.73,19,United_States,2

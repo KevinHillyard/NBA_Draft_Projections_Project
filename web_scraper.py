@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import numpy as np
 import csv
 
+
 def PlayerStats(stats, player):
     for i, stat in enumerate(stats):
         if i == 3:
@@ -15,9 +16,9 @@ def PlayerStats(stats, player):
             player.freethrowp = float(stat.text)
         elif i == 31:
             player.offreb = float(stat.text)
-        elif i ==33:
+        elif i == 33:
             player.defreb = float(stat.text)
-        elif i ==37:
+        elif i == 37:
             player.assists = float(stat.text)
         elif i == 39:
             player.steals = float(stat.text)
@@ -32,6 +33,7 @@ def PlayerStats(stats, player):
         else:
             continue
 
+
 def GLeaguePlayerStats(stats, player):
     player.background = "GLEAGUE"
     for i, stat in enumerate(stats):
@@ -43,9 +45,9 @@ def GLeaguePlayerStats(stats, player):
             player.freethrowp = float(stat.text)
         elif i == 29:
             player.offreb = float(stat.text)
-        elif i ==31:
+        elif i == 31:
             player.defreb = float(stat.text)
-        elif i ==35:
+        elif i == 35:
             player.assists = float(stat.text)
         elif i == 37:
             player.steals = float(stat.text)
@@ -60,6 +62,7 @@ def GLeaguePlayerStats(stats, player):
         else:
             continue
 
+
 def drafted(pi, player):
     path = None
     for index, info in enumerate(pi):
@@ -72,8 +75,8 @@ def drafted(pi, player):
         elif index == 1:
             # In this column is a link to the players personal page with
             # their college stats.
-            href = info.find('a')
-            path = href.get('href')
+            href = info.find("a")
+            path = href.get("href")
         elif index == 4:
             player.pos = info.text
         elif index == 5:
@@ -88,6 +91,7 @@ def drafted(pi, player):
             continue
     return path
 
+
 def undrafted(pi, player):
     player.draftnum = 61
     path = None
@@ -96,8 +100,8 @@ def undrafted(pi, player):
         if index == 0:
             # In this column is a link to the players personal page with
             # their college stats.
-            href = info.find('a')
-            path = href.get('href')
+            href = info.find("a")
+            path = href.get("href")
         elif index == 1:
             player.pos = info.text
         elif index == 2:
@@ -112,7 +116,8 @@ def undrafted(pi, player):
             continue
     return path
 
-class Player():
+
+class Player:
     def __init__(self):
         self.pos = None
         self.height = None
@@ -134,8 +139,26 @@ class Player():
         self.nation = None
 
     def toArray(self):
-        return [self.pos,self.height,self.weight,self.ppg,self.threeptp,self.fieldgoalp,self.freethrowp,self.background,
-        self.steals,self.tover,self.assists,self.offreb,self.defreb,self.blocks,self.fouls,self.age,self.nation,self.draftnum]
+        return [
+            self.pos,
+            self.height,
+            self.weight,
+            self.ppg,
+            self.threeptp,
+            self.fieldgoalp,
+            self.freethrowp,
+            self.background,
+            self.steals,
+            self.tover,
+            self.assists,
+            self.offreb,
+            self.defreb,
+            self.blocks,
+            self.fouls,
+            self.age,
+            self.nation,
+            self.draftnum,
+        ]
 
 
 year = 2021
@@ -163,7 +186,7 @@ for _ in range(1):
                 playerPath = drafted(pi, player)
             else:
                 playerPath = undrafted(pi, player)
-            
+
             # Getting the players personal page
             playerURL = base_url + playerPath
             playerPage = requests.get(playerURL)
@@ -172,44 +195,68 @@ for _ in range(1):
             ncaa = True
             gleague = False
             international = False
-            ncaaHeader = playerSoup.find('h2', string="NCAA Season Stats - Per Game")
+            ncaaHeader = playerSoup.find("h2", string="NCAA Season Stats - Per Game")
             # If not NCAA check if G-League
             if ncaaHeader == None:
                 ncaa = False
-                ncaaHeader = playerSoup.find('h2', string="G League Regular Season Stats - Per Game")
+                ncaaHeader = playerSoup.find(
+                    "h2", string="G League Regular Season Stats - Per Game"
+                )
                 gleague = True
             # If not G-League check if international
             if ncaaHeader == None:
                 gleague = False
-                ncaaHeader = playerSoup.find('h2', string="International Regular Season Stats - Per Game")
+                ncaaHeader = playerSoup.find(
+                    "h2", string="International Regular Season Stats - Per Game"
+                )
                 international = True
- 
+
             # Getting to the table right under the header
             ncaaTable = ncaaHeader.next_element.next_element
             # Getting the ncaa career averages row
             if international:
-                ncaaCareer = ncaaTable.find('tbody')
+                ncaaCareer = ncaaTable.find("tbody")
             else:
-                ncaaCareer = ncaaTable.find('tfoot')
+                ncaaCareer = ncaaTable.find("tfoot")
             # The row itself
-            stats = ncaaCareer.find('tr') 
+            stats = ncaaCareer.find("tr")
 
             if ncaa or international:
                 PlayerStats(stats, player)
             elif gleague:
-                GLeaguePlayerStats(stats, player)           
+                GLeaguePlayerStats(stats, player)
 
             # Add player to list of all players
-            allPlayers.append(player) 
-    # Decrement year to go to the previous year's draft when we build the url   
+            allPlayers.append(player)
+    # Decrement year to go to the previous year's draft when we build the url
     year -= 1
 
 playerRows = [instance.toArray() for instance in allPlayers]
 # Get number of instances. Used for reshaping
-file = open(r'/home/kevin/school/Fall2021/cs472/group-project/venvironment/data-gathering/web-scraper/allPlayers.csv', 'w+', newline='')
+file = open(r"./allPlayers.csv", "w+", newline="")
 with file:
     write = csv.writer(file)
-    write.writerow(["Position","Height","Weight","PPG","3pt%","FG%","FT%","League","Steals",
-    "TOV","Assits","Off-Rebount","Def-Rebound","Blocks","Fouls","Age","Nation","Draft Position"])
+    write.writerow(
+        [
+            "Position",
+            "Height",
+            "Weight",
+            "PPG",
+            "3pt%",
+            "FG%",
+            "FT%",
+            "League",
+            "Steals",
+            "TOV",
+            "Assits",
+            "Off-Rebount",
+            "Def-Rebound",
+            "Blocks",
+            "Fouls",
+            "Age",
+            "Nation",
+            "Draft Position",
+        ]
+    )
     write.writerows(playerRows)
 file.close()
