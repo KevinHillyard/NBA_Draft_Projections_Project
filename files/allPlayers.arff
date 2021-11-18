@@ -1,3 +1,7 @@
+% Position Num Options: 9 - 4 bits
+% League Num Options: 8 - 3 bits
+% Position Num Options: 22 - 5 bits
+
 @relation allPlayers
 @attribute Position { SF, SG, PF, G, F, PG, C, FC, GF }
 @attribute Height integer
