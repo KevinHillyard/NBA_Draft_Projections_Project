@@ -66,6 +66,7 @@ def mlp():
                                 training_y.flatten(),
                             )
                             predictions = mlp_model.predict(test_x)
+                            y = test_y.flatten()
                             mse = np.zeros(len(y))
                             for i in range(len(predictions)):
                                 prediction = predictions[i]
