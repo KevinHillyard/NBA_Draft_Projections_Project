@@ -1,7 +1,7 @@
 from random import random
 import numpy as np
 import csv
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.utils import shuffle
 from arff_utils import Arff_Utils
@@ -29,7 +29,7 @@ def mlp():
         (16, 32, 16),
         (8, 8, 8),
     ]
-    lrs = [1.0, 0.8, 0.1, 0.01]
+    lrs = [0.01, 0.1, 0.8, 1.0]
     momentums = [0.0, 0.5, 0.8, 1.0]
     regularization = [0, 0.00001, 0.0001, 0.0005]
     with open(
@@ -53,11 +53,11 @@ def mlp():
             for lr_ in lrs:
                 for momentum_ in momentums:
                     for reg_ in regularization:
-                        mlp_model = MLPClassifier(
+                        mlp_model = MLPRegressor(
                             hidden_layer_sizes=hn_,
                             alpha=reg_,
                             learning_rate_init=lr_,
-                            max_iter=10000000,
+                            max_iter=1000000,
                             momentum=momentum_,
                         )
                         mlp_model.fit(
@@ -65,6 +65,16 @@ def mlp():
                             training_y.flatten(),
                         )
                         predictions = mlp_model.predict(test_x)
+                        # print(training_x)
+                        # print("Y")
+                        # print(training_y)
+                        # print("TEST X")
+                        # print(test_x)
+                        # print("TEST Y")
+                        # print(test_y)
+                        # print("PREDICTIONS")
+                        # print(predictions)
+                        # return
                         y = test_y.flatten()
                         mse = np.zeros(len(y))
                         for i in range(len(predictions)):
