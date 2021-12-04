@@ -7,7 +7,7 @@ import math
 
 class Arff_Utils:
     def get_all_players_as_numpy():
-        data_arff = arff_reader.Arff(arff=r"./files/allPlayers.arff", label_count=1)
+        data_arff = arff_reader.Arff(arff=r"./files/adjustedFinalDataSet.arff", label_count=1)
         nominals = data_arff.get_nominal_idx()
         for i in range(len(nominals)):
             nominals[i] = [nominals[i], data_arff.unique_value_count(nominals[i])]
