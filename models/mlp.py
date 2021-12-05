@@ -11,11 +11,7 @@ import sys
 
 def mlp():
     x, y = Arff_Utils.get_all_players_as_numpy()
-    np.set_printoptions(threshold=sys.maxsize)
-    print(x)
-    print(y)
 
-    return
     training_index = round(len(x) * 0.8)
     training_x = x[:training_index]
     test_x = x[training_index:]
@@ -69,28 +65,29 @@ def mlp():
                             training_y.flatten(),
                         )
                         predictions = mlp_model.predict(test_x)
+                        y = test_y.flatten()
                         # print(training_x)
                         # print("Y")
                         # print(training_y)
                         # print("TEST X")
                         # print(test_x)
-                        # print("TEST Y")
-                        # print(test_y)
-                        # print("PREDICTIONS")
-                        # print(predictions)
-                        # return
-                        y = test_y.flatten()
-                        mse = np.zeros(len(y))
-                        for i in range(len(predictions)):
-                            prediction = predictions[i]
-                            if prediction > 61:
-                                prediction == 61
-                            mse[i] = (prediction - y[i]) ** 2
+                        # for i in range(len(predictions)):
+                        #     if predictions[i] > 61:
+                        #         predictions[i] == 61
+                        # print("TEST Y VS PREDICTIONS")
 
-                        mse = np.sum(mse) / len(mse)
-                        rmse = math.sqrt(mse)
+                        me = np.zeros(len(y))
+                        for i in range(len(predictions)):
+                            if predictions[i] > 61:
+                                predictions[i] = 61
+                            me[i] = abs(predictions[i] - y[i])
+
+                        # for i in range(len(predictions)):
+                        #     print(f"me: {me[i]} y: {y[i]} pred: {predictions[i]}")
+
+                        me = np.sum(me) / len(me)
                         result_row = [
-                            rmse,
+                            me,
                             hn_,
                             lr_,
                             momentum_,
