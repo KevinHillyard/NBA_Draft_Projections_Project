@@ -7,7 +7,9 @@ import math
 
 class Arff_Utils:
     def get_all_players_as_numpy():
-        data_arff = arff_reader.Arff(arff=r"./files/allPlayers.arff", label_count=1)
+        data_arff = arff_reader.Arff(
+            arff=r"./files/finalDataSetTrimmed.arff", label_count=1
+        )
         nominals = data_arff.get_nominal_idx()
         for i in range(len(nominals)):
             nominals[i] = [nominals[i], data_arff.unique_value_count(nominals[i])]
@@ -38,7 +40,6 @@ class Arff_Utils:
                     insert_columns[row_index][col_index] = bits[j]
                     col_index += 1
 
-        tmp = np.array(data_features)
         index_tracker = 0
         for i in range(len(nominals)):
             data_features = np.concatenate(

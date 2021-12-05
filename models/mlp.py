@@ -11,7 +11,11 @@ import sys
 
 def mlp():
     x, y = Arff_Utils.get_all_players_as_numpy()
+    np.set_printoptions(threshold=sys.maxsize)
+    print(x)
+    print(y)
 
+    return
     training_index = round(len(x) * 0.8)
     training_x = x[:training_index]
     test_x = x[training_index:]
