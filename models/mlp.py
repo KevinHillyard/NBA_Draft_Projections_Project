@@ -33,7 +33,7 @@ def mlp():
     momentums = [0.0, 0.5, 0.8, 1.0]
     regularization = [0, 0.00001, 0.0001, 0.0005]
     with open(
-        r"./files/grid_search.csv",
+        r"./files/grid_search_mlp.csv",
         "w",
         encoding="UTF8",
         newline="",
