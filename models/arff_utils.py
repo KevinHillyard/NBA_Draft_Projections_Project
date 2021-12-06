@@ -29,7 +29,7 @@ class Arff_Utils:
             test_x = np.delete(x, training_indeces, axis=0)
             test_y = np.delete(y, training_indeces, axis=0)
 
-            model_object.fit(training_x, training_y)
+            model_object.fit(training_x, training_y.flatten())
             predictions = model_object.predict(test_x)
 
             me = np.zeros(len(test_y))

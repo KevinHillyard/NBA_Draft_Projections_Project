@@ -14,7 +14,7 @@ def knn():
         "minkowski",
     ]
     with open(
-        r"grid_search_knn.csv",
+        r"./files/grid_search_knn.csv",
         "w",
         encoding="UTF8",
         newline="",

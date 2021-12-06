@@ -15,7 +15,7 @@ def dt():
         [0.0, 0.001, 0.01],
     ]
     with open(
-        r"grid_search_dt.csv",
+        r"./files/grid_search_dt.csv",
         "w",
         encoding="UTF8",
         newline="",
