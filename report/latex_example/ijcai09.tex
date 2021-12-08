@@ -183,6 +183,18 @@ exhaustively searched to find the best results, as recorded in Table
 \end{table}
 
 \section{Feature and Model Improvements}
+\subsection{Improvements}
+To improve our results we reviewed the most important features and least important 
+features as determined by the weights from our linear regression model. The features 
+that had the lowest weights included the following features: Usage %, Assist %, Field 
+Goals Made, Field Goals Attempted, Free Throws Made, Free Throws Attempted, 3-pointers 
+Made, and 3-pointers Attempted. We deemed these features safe to remove as they had 
+low weights and the essence of their statistic was captured in a different feature. 
+For example, Field Goals Made and Field Goals Attempted is captured in the feature 
+Field Goal % which has a high weight.
+In removing these somewhat redundant features we were able to slightly 
+improve our predictions. 
+
 
 \section{Final Results}
 
