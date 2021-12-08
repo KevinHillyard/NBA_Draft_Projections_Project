@@ -15,7 +15,7 @@ def dt():
         [0.0, 0.001, 0.01],
     ]
     with open(
-        r"./files/grid_search_dt.csv",
+        r"./files/grid_search_dt_no_undrafted.csv",
         "w",
         encoding="UTF8",
         newline="",
@@ -36,7 +36,7 @@ def dt():
             ]
         )
         for iteration in range(3):
-            x, y = Arff_Utils.get_all_players_as_numpy()
+            x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=False)
             for criterion in hyperparameter_grid[0]:
                 for splitter in hyperparameter_grid[1]:
                     for max_depth in hyperparameter_grid[2]:

@@ -37,16 +37,23 @@ class Arff_Utils:
                 if predictions[j] > 61:
                     predictions[j] = 61
                 me[j] = abs(predictions[j] - test_y[j])
+
                 # print(f"me: {me[j]} y: {test_y[j]} pred: {predictions[j]}")
 
             agg_me[i] = np.sum(me) / len(me)
 
         return np.sum(agg_me) / len(agg_me)
 
-    def get_all_players_as_numpy():
+    def get_all_players_as_numpy(include_undrafted=True):
         data_arff = arff_reader.Arff(
-            arff=r"./files/finalDataSetTrimmed.arff", label_count=1
+            arff=(
+                r"./files/finalDataSetTrimmed.arff"
+                if include_undrafted
+                else r"./files/finalDataSetNoUndrafted.arff"
+            ),
+            label_count=1,
         )
+
         nominals = data_arff.get_nominal_idx()
         for i in range(len(nominals)):
             nominals[i] = [nominals[i], data_arff.unique_value_count(nominals[i])]
