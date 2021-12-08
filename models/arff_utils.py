@@ -37,6 +37,7 @@ class Arff_Utils:
                 if predictions[j] > 61:
                     predictions[j] = 61
                 me[j] = abs(predictions[j] - test_y[j])
+                # print(f"me: {me[j]} y: {test_y[j]} pred: {predictions[j]}")
 
             agg_me[i] = np.sum(me) / len(me)
 
