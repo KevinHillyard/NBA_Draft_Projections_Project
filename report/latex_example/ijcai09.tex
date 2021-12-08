@@ -163,7 +163,7 @@ Linear Regression models. Each of these had a grid of hyperparameters that was
 exhaustively searched to find the best results, as recorded in Table
 \ref{tab:test_table}.
 
-\begin{table}
+\begin{table*}
 	\begin{center}
 		\begin{tabular}{||c c c c c c||} 
 		\hline\hline
@@ -180,19 +180,21 @@ exhaustively searched to find the best results, as recorded in Table
 	\end{center}
 	\caption{Test table}
 	\label{tab:test_table}
-\end{table}
+\end{table*}
 
 \section{Feature and Model Improvements}
+
 \subsection{Improvements}
-To improve our results we reviewed the most important features and least important 
-features as determined by the weights from our linear regression model. The features 
-that had the lowest weights included the following features: Usage %, Assist %, Field 
-Goals Made, Field Goals Attempted, Free Throws Made, Free Throws Attempted, 3-pointers 
-Made, and 3-pointers Attempted. We deemed these features safe to remove as they had 
-low weights and the essence of their statistic was captured in a different feature. 
-For example, Field Goals Made and Field Goals Attempted is captured in the feature 
-Field Goal % which has a high weight.
-In removing these somewhat redundant features we were able to slightly 
+
+To improve our results we reviewed the most important features and least
+important features as determined by the weights from our linear regression
+model. The features that had the lowest weights included the following features:
+Usage \%, Assist \%, Field Goals Made, Field Goals Attempted, Free Throws Made,
+Free Throws Attempted, 3-pointers Made, and 3-pointers Attempted. We deemed
+these features safe to remove as they had low weights and the essence of their
+statistic was captured in a different feature. For example, Field Goals Made and
+Field Goals Attempted is captured in the feature Field Goal \% which has a high
+weight. In removing these somewhat redundant features we were able to slightly
 improve our predictions. 
 
 
@@ -201,6 +203,38 @@ improve our predictions.
 \section{Discussion and Conclusion}
 
 \section{Future Work}
+
+There are some minor changes we would make to our research to improve the
+results of our predictions. These changes include further research about the
+data, how the error of our models was determined, and some additional features.
+
+\subsection{Further Draft Research}
+
+As previously mentioned in this report there were some contributing factors to a
+player’s draft stock that we did not take into account when gathering our data.
+When gathering our data and when a player was drafted it would be worthwhile to
+research the team’s needs that drafted that player. Knowing this would allow us
+to determine if the player was drafted at that position for their skills as a
+player or more for their fit with that team.
+
+\subsection{Error Scoring}
+
+There was an issue with the error scoring with our models as we were using the
+scikit models with their own error scoring function. Because undrafted players
+don’t have a draft position associated with them we edited our data so that all
+undrafted players were drafted 61st. The issue appears when our models predict a
+draft position greater than 61. Our data has a max of 61 while our models are
+able to predict draft positions higher than this. The error scoring considers
+this difference as an error when in reality if the player has a draft position
+of 61 any placement greater than or equal to 61 should be considered correct. 
+
+\subsection{Additional Features/Sources}
+
+As a final change to our research we would gather data from one or more
+additional sites in order to gather all advanced statistics possible. The site
+we pulled our data from had a large number of advanced statistics but not all of
+them.
+
 
 \end{document}
 

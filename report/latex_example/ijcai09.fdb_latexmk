@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1639003658 "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf" "ijcai09" 1639003658
+["pdflatex"] 1639004699 "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf" "ijcai09" 1639004700
   "/etc/texmf/web2c/texmf.cnf" 1630289531 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.aux" 1639003658 1295 5d2b62d02a2f7118e972bab0d001302c ""
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" 1639003657 8516 a66faf3d0f8ffb1c7e0dc4766d2a1de6 ""
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.aux" 1639004700 1741 c390c01b169e416d13f0ffb252353117 ""
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" 1639004698 10941 fb168513a57d8d49d746557fc2c0e2b9 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1136768653 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -60,12 +60,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1613593815 38841 799d1dd9682a55ce442e10c99777ecc1 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1631027678 4856172 17904a52973240b44a2e5720d5f9ac05 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1631028195 1313554 80fbe100948663a6d560076a1d98e525 ""
-  "ijcai09.aux" 1639003658 1295 5d2b62d02a2f7118e972bab0d001302c "pdflatex"
+  "ijcai09.aux" 1639004700 1741 c390c01b169e416d13f0ffb252353117 "pdflatex"
   "ijcai09.sty" 1484685459 13541 87403d2cee1cbfa44d11b374154ec18b ""
-  "ijcai09.tex" 1639003657 8516 a66faf3d0f8ffb1c7e0dc4766d2a1de6 ""
+  "ijcai09.tex" 1639004698 10941 fb168513a57d8d49d746557fc2c0e2b9 ""
   (generated)
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf"
   "ijcai09.pdf"
   "ijcai09.aux"
   "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.log"
   "ijcai09.log"
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf"
