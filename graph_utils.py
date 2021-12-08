@@ -45,16 +45,22 @@ def graph_best_models():
     for i in range(len(bar_x)):
         if "_2" in bar_x[i]:
             barlist[i].set_color("r")
+        if "_3" in bar_x[i]:
+            barlist[i].set_color("g")
 
     legend_elements = [
         Line2D([0], [0], color="b", lw=4, label="With Undrafted Players"),
         Line2D([0], [0], color="r", lw=4, label="Without Undrafted Players"),
+        Line2D([0], [0], color="g", lw=4, label="With Undrafted, Smaller Dataset"),
     ]
     ax.legend(handles=legend_elements, loc="upper right")
+    ax.tick_params(axis="x", labelrotation=45)
+    plt.ylim([0, 14])
     plt.ylabel("Mean Absolute Error")
     plt.xlabel("Model Name")
     plt.title("Mean Absolute Error Using Ten-Fold Cross Validation")
-    plt.savefig("./files/error_by_model.png")
+    plt.tight_layout()
+    plt.savefig("./files/error_by_model_2.png")
 
 
 if __name__ == "__main__":
