@@ -7,7 +7,7 @@ from arff_utils import Arff_Utils
 
 def linear_regression():
     with open(
-        r"./files/grid_search_linear_regression_no_undrafted.csv",
+        r"./files/grid_search_linreg_3.csv",
         "w",
         encoding="UTF8",
         newline="",
@@ -22,7 +22,7 @@ def linear_regression():
             ]
         )
         for iteration in range(10):
-            x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=False)
+            x, y = Arff_Utils.get_all_players_as_numpy(use_smaller=True)
             linreg = LinearRegression()
             me = Arff_Utils.ten_fold_cross_validation(linreg, x, y)
             result_row = np.concatenate(

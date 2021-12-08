@@ -1,0 +1,194 @@
+%%%% ijcai09.tex
+
+\typeout{Predicting NBA Draft Position for Basketball Prospects}
+
+% These are the instructions for authors for IJCAI-09.
+% They are the same as the ones for IJCAI-07 with superficical wording
+%   changes only.
+
+\documentclass{article}
+% The file ijcai09.sty is the style file for IJCAI-09 (same as ijcai07.sty).
+\usepackage{ijcai09}
+
+% Use the postscript times font!
+\usepackage{times}
+
+% Template-specific packages
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+
+\usepackage{graphicx} % Required for including images
+
+\usepackage{booktabs} % Required for better horizontal rules in tables
+
+\usepackage{listings} % Required for insertion of code
+
+\usepackage{enumerate} % To modify the enumerate environment
+
+\usepackage{dblfloatfix} % To allow pushing table and figures to bottom of page
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{floatrow}
+% Table float box with bottom caption, box width adjusted to content
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+
+% the following package is optional:
+%\usepackage{latexsym} 
+
+% Following comment is from ijcai97-submit.tex:
+% The preparation of these files was supported by Schlumberger Palo Alto
+% Research, AT\&T Bell Laboratories, and Morgan Kaufmann Publishers.
+% Shirley Jowell, of Morgan Kaufmann Publishers, and Peter F.
+% Patel-Schneider, of AT\&T Bell Laboratories collaborated on their
+% preparation.
+
+% These instructions can be modified and used in other conferences as long
+% as credit to the authors and supporting agencies is retained, this notice
+% is not changed, and further modification or reuse is not restricted.
+% Neither Shirley Jowell nor Peter F. Patel-Schneider can be listed as
+% contacts for providing assistance without their prior permission.
+
+% To use for other conferences, change references to files and the
+% conference appropriate and use other authors, contacts, publishers, and
+% organizations.
+% Also change the deadline and address for returning papers and the length and
+% page charge instructions.
+% Put where the files are available in the appropriate places.
+
+\title{Predicting the Draft Slot of NBA Prospects in the Modern Era}
+\author{Kevin Hillyard \& Brent George \\
+CS 472, Winter 2021 \\
+Department of Computer Science\\
+Brigham Young University}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Every year experts attempt to determine which basketball players are the most
+  valuable and when those players should be picked in the NBA draft. In this
+  paper, we record our efforts to accurately predict where players should be
+  drafted based on their stats using different machine learning models. We first
+  describe by what means our data was gathered and what type of data we
+  gathered. We then review the results we had in predicting a player’s draft
+  position with our different models, namely KNN, decision tree, multi-layer
+  perceptron, and linear regression. We then review our findings, especially
+  from linear regression, in summarizing which statistics were important, and
+  which were not as important. Lastly our ideas for future work and improvements
+  to our research are made known.
+\end{abstract}
+
+\section{Introduction}
+
+NBA scouts are always looking for NBA potential players. When determining how
+good a player is they are almost always compared to past players. Most people
+are able to predict the top 3 to 5 NBA picks from the available players but it
+is nigh impossible to predict each draft pick accurately. 
+
+In our research we attempted to use machine learning models to predict where a
+player would be drafted. These models use the past 11 years of NBA draft
+results, along with the players’ associated statistics, to determine where the
+player should be drafted if they are to be drafted at all.
+
+There was some difficulty in predicting a player’s draft position as it is a
+human perception of that player’s capability and is often swayed by what each
+NBA teams’ current needs are. We were also limited to a certain number of
+players as the era of basketball has changed, encouraging more long range field
+goals compared to years prior. This drastically affects the typical stats for
+players making comparisons between newer and older players less viable.
+
+Despite those difficulties we were able to predict a player’s draft position to
+within 10 picks. In a future study if we were to account for the aforementioned
+issues the accuracy of our results could be increased.
+
+\section{Methods}
+
+\subsection{Data Source}
+
+There are various online providers of basketball statistics. Official sources
+include NBA.com and the official site of NCAA basketball. However, official
+sources often do not include more than the most basic statistics.
+
+Several sites exist that provide extensive college statistics. Many of these
+have a paywall (kenpom.com) or do not include statistics for international
+prospects. Other sites request not to be scraped by bots.
+
+After further exploration, we found realgm.com, a site that consented to limited
+scraping that also included historical data for past statistics, data on
+international prospects, and a wide array of advanced statistics. We wrote a web
+scraper in Python to traverse the element tree of the web page and lift each of
+the players selected in the past 11 NBA drafts and every available statistics
+associated with those 660 players. This formed our initial dataset, which was
+stored in a CSV file. We also pulled the records of nearly 736 prospects that
+went undrafted during that same time period. 
+
+\subsection{Featurization of Data}
+
+Due to the nature of basketball statistics, the data scraped from the website
+was already largely in the form we needed. We wrote a Python script to perform a
+few sanitizing steps and convert the CSV file to an ARFF file.
+
+The main sanitization we needed to perform was the consolidation of various
+leagues that prospects played in. Prospects played in over 35 leagues and
+countries. While there was consistency for prospects that played in the NCAA in
+the United States, there was extreme fragmentation among the teams and leagues
+that international prospects played for. In order to help the model, we grouped
+all international teams under one label, leaving us with three total league
+labels: NCAA, G-League, and International.
+
+While drafted players were labeled according to their draft selection, the
+undrafted players that we pulled were unlabeled. We didn’t want to use a
+clustering algorithm to label these instances - a clustering algorithm would
+attempt to label these players with a pick number from 1 to 60, whereas we
+wanted to be able to predict if a player went undrafted. We decided to label any
+undrafted player as being picked 61st, with the plan of interpreting our future
+model’s output under this assumption. This led to over half of our dataset
+consisting of players “selecting 61st in the draft”. This would prove to have
+some positive effects, such as giving the model many examples of poor prospects
+on the higher end of the draft. It would also have negative effects, such as
+leading the models to be biased towards higher pick numbers when it was unsure. 
+
+\subsection{Models}
+
+We used a variety of models in this project, to be described in further detail
+in results sections. All implementations came from scikit learn v1.0.1.
+
+\section{Initial Results}
+
+Initially, we trained Decision Tree, Multi-Layer Perceptron, KNN-Neighbor, and
+Linear Regression models. Each of these had a grid of hyperparameters that was
+exhaustively searched to find the best results, as recorded in Table
+\ref{tab:test_table}.
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{||c c c c c c||} 
+		\hline\hline
+		Dataset & Algorithm & Centroid \# & SSE & Size & Silhouette Score \\ 
+		\hline\hline
+		Debug & Single Link HAC & Total & 54.4392 & 200 & 0.3453 \\ \hline
+		Debug & Single Link HAC & 1 & 54.3917 & 195 & \\ \hline
+		Debug & Single Link HAC & 2 & 0.0000 & 1 & \\ \hline
+		Debug & Single Link HAC & 3 & 0.0475 & 2 & \\ \hline
+		Debug & Single Link HAC & 4 & 0.0000 & 1 & \\ \hline
+		Debug & Single Link HAC & 5 & 0.0000 & 1 & \\ \hline
+		\hline\hline
+		\end{tabular}
+	\end{center}
+	\caption{Test table}
+	\label{tab:test_table}
+\end{table}
+
+\section{Feature and Model Improvements}
+
+\section{Final Results}
+
+\section{Discussion and Conclusion}
+
+\section{Future Work}
+
+\end{document}
+

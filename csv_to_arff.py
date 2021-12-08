@@ -39,7 +39,7 @@ class CSV_to_ARFF:
 
 if __name__ == "__main__":
     arff_writer = CSV_to_ARFF(
-        in_filename=r"./files/finalDataSetNoUndrafted.csv",
-        out_filename=r"./files/finalDataSetNoUndrafted.arff",
+        in_filename=r"./files/finalDataSetSmaller.csv",
+        out_filename=r"./files/finalDataSetSmaller.arff",
     )
     arff_writer.write_arff()

@@ -14,7 +14,7 @@ def knn():
         "minkowski",
     ]
     with open(
-        r"./files/grid_search_knn_no_undrafted.csv",
+        r"./files/grid_search_knn_3.csv",
         "w",
         encoding="UTF8",
         newline="",
@@ -30,7 +30,7 @@ def knn():
             ]
         )
         for iteration in range(3):
-            x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=False)
+            x, y = Arff_Utils.get_all_players_as_numpy(use_smaller=True)
 
             for k in k_values:
                 for distance_metric in distance_metrics:

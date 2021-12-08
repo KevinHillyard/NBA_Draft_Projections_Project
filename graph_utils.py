@@ -54,7 +54,7 @@ def graph_best_models():
     plt.ylabel("Mean Absolute Error")
     plt.xlabel("Model Name")
     plt.title("Mean Absolute Error Using Ten-Fold Cross Validation")
-    plt.savefig("./files/error_by_model.pdf")
+    plt.savefig("./files/error_by_model.png")
 
 
 if __name__ == "__main__":

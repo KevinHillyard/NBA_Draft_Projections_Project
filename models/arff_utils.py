@@ -44,12 +44,16 @@ class Arff_Utils:
 
         return np.sum(agg_me) / len(agg_me)
 
-    def get_all_players_as_numpy(include_undrafted=True):
+    def get_all_players_as_numpy(include_undrafted=True, use_smaller=False):
         data_arff = arff_reader.Arff(
             arff=(
-                r"./files/finalDataSetTrimmed.arff"
-                if include_undrafted
-                else r"./files/finalDataSetNoUndrafted.arff"
+                r"./files/finalDataSetSmaller.arff"
+                if use_smaller
+                else (
+                    r"./files/finalDataSetTrimmed.arff"
+                    if include_undrafted
+                    else r"./files/finalDataSetNoUndrafted.arff"
+                )
             ),
             label_count=1,
         )

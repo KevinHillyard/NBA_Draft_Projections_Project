@@ -20,7 +20,7 @@ def mlp():
     momentums = [0.3, 0.5, 0.8]
     regularization = [0.0001, 0.0005, 0.001]
     with open(
-        r"./files/grid_search_mlp_no_undrafted.csv",
+        r"./files/grid_search_mlp_3.csv",
         "w",
         encoding="UTF8",
         newline="",
@@ -38,7 +38,7 @@ def mlp():
             ]
         )
         for iteration in range(3):
-            x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=False)
+            x, y = Arff_Utils.get_all_players_as_numpy(use_smaller=True)
             for hn_ in hidden_nodes_options:
                 for lr_ in lrs:
                     for momentum_ in momentums:
