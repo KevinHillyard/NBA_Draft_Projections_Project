@@ -24,10 +24,7 @@ def dt():
         writer = csv.writer(f)
         writer.writerow(
             [
-                "me",We trained the model with max depths of either 8, 16, 24, 32, or 48
-layers. In addition we also used a minimum sample size of either 2, 4, or 6
-samples for splits and for leaves. Lastly we set the minimum weight fraction
-leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
+                "me",
                 "iteration",
                 "criterion",
                 "splitter",
@@ -74,5 +71,23 @@ leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
                                         print(f"{result_row}")
 
 
+def test():
+    x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=True)
+    average = np.average(y)
+    error = 0
+    for i in range(len(y)):
+        error += abs(y[i] - average)
+
+    print(f"With Undrafted Baseline MAE: {error / len(y)} Ave: {average}")
+
+    x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=False)
+    average = np.average(y)
+    error = 0
+    for i in range(len(y)):
+        error += abs(y[i] - average)
+
+    print(f"Without Undrafted Baseline MAE: {error / len(y)}  Ave: {average}")
+
+
 if __name__ == "__main__":
-    dt()
+    test()

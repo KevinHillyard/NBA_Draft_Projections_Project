@@ -252,6 +252,10 @@ all hyperparameter combinations, and with minimums of about 12 picks off for the
 best model and hyperparameter combinations. An issue we found with this subset
 was that there were not enough bad players for the models to learn form. 
 
+The baseline MAE for this first dataset is based off of guessing the average
+pick for each prospect. The average draft slot was 30.5, and the baseline MAE
+using this average was 14.976.
+
 \subsection{Decision Tree}
 
 After training the decision tree model on this subset it achieved a minimum MAE
@@ -280,9 +284,14 @@ best MAE had hidden nodes set to (64, 64), a learning rate of 0.2, a momentum of
 
 \subsection{With Drafted and Undrafted Players}
 
-As already mentioned the following models achieved a better MAE when using both
-drafted and undafted players. The variety of talent allowed the models to learn
-to recognize both good and bad players and was more accurate as a result.
+As already mentioned, the lack of examples of bad players made the learning
+difficult for the first round of models. The following models achieved a better
+MAE when using both drafted and undafted players. The variety of talent allowed
+the models to learn to recognize both good and bad players and was more accurate
+as a result.
+
+The average draft slot for this more comprehensive dataset was 46.756. Using
+this average, the baseline MAE is 16.636.
 
 \subsection{Decision Tree}
 
@@ -351,6 +360,10 @@ values of various features when calculating the distance between neighbors, so
 if we had many redundant or useless features, they would drown out the important
 features and make it difficult for the KNN model to be effective.
 
+Because we reduced the number of features, but did not change the number of
+instances, the baseline MAE remained unchanged. The average draft slot was
+46.756 again, and the baseline MAE is 16.636.
+
 \section{Final Results}
 
 \subsection{Decision Tree}
@@ -412,22 +425,44 @@ the Final Results section.
 
 \section{Discussion and Conclusion}
 
+Our results were largely promising, especially considering the speculative
+nature of the late first round and second round of the NBA draft. Our models'
+best efforts could predict a player's draft slot within about 9 picks. This is
+valuable in and of itself, as many NBA prospects will hire outside counsel to
+discover where they might fall in the draft. They use the counsel's predictions
+to determine whether to continue to develop their game for another year, or
+whether to declare for the current year's draft. Having our free ML model
+available to give a first or second opinion may be of value.
 
+Our model performed slightly better than the baseline MAE for the dataset that
+only included drafted players. The baseline MAE was about 15, and our best
+models had Mean Absolute Errors ranging from 11 to 13. For the datasets that
+included undrafted players as well, the models outpaced the baseline MAE by a
+few more points - the baseline MAE was almost 17, and our best models had Mean
+Absolute Errors ranging from 9 to 11.
+
+Unfortunately, the model does not perform better than current human standards.
+In this sense, this problem is not "solved" by our approach. Future work needs
+to be done to improve the results. Most expert draft analysts have a MAE of 4-5
+picks every NBA draft. A model that could match or improve on this benchmark may
+be possible with the improvements discussed in the next section.
 
 \section{Future Work}
 
-There are some minor changes we would make to our research to improve the
-results of our predictions. These changes include further research about the
-data, how the error of our models was determined, and some additional features.
+Changes we would make to our research to improve the results of our predictions
+include further research about the data, how the error of our models was
+determined, and additional features.
 
 \subsection{Further Draft Research}
 
 As previously mentioned in this report there were some contributing factors to a
 player’s draft stock that we did not take into account when gathering our data.
-When gathering our data and when a player was drafted it would be worthwhile to
+When gathering our data on when a player was drafted it would be worthwhile to
 research the team’s needs that drafted that player. Knowing this would allow us
 to determine if the player was drafted at that position for their skills as a
-player or more for their fit with that team. 
+player or more for their fit with that team. We could create a feature that
+encodes how many picks higher or lower a certain prospect was drafted based on
+the needs of the teams drafting in that prospect's range.
 
 Additionally, we could do player comparisons with existing NBA players. This is
 a common draft tactic used by general managers, and it might be helpful for the
