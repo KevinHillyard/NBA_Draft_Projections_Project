@@ -158,6 +158,30 @@ in results sections. All implementations came from scikit learn v1.0.1.
 
 \section{Initial Results}
 
+Initially, we trained Decision Tree, Multi-Layer Perceptron, KNN-Neighbor, and
+Linear Regression models. Each of these had a grid of hyperparameters that was
+exhaustively searched to find the best results, as recorded in Table
+\ref{tab:test_table}.
+
+\begin{table*}
+	\begin{center}
+		\begin{tabular}{||c c c c c c||} 
+		\hline\hline
+		Dataset & Algorithm & Centroid \# & SSE & Size & Silhouette Score \\ 
+		\hline\hline
+		Debug & Single Link HAC & Total & 54.4392 & 200 & 0.3453 \\ \hline
+		Debug & Single Link HAC & 1 & 54.3917 & 195 & \\ \hline
+		Debug & Single Link HAC & 2 & 0.0000 & 1 & \\ \hline
+		Debug & Single Link HAC & 3 & 0.0475 & 2 & \\ \hline
+		Debug & Single Link HAC & 4 & 0.0000 & 1 & \\ \hline
+		Debug & Single Link HAC & 5 & 0.0000 & 1 & \\ \hline
+		\hline\hline
+		\end{tabular}
+	\end{center}
+	\caption{Test table}
+	\label{tab:test_table}
+\end{table*}
+
 \subsection{Without Undrafted Players}
 
 We trained our models on two separate versions of our dataset. One dataset did not include
@@ -220,31 +244,6 @@ Linear Regression model that scored 11.265, but is in the bottom half of models 
 Lastly our MLP had the second best initial score with a MAE of 9.851. It used the same hyperparameters as the previous MLP model, 
 but had the following settings: hidden nodes was set to 128, learning rate was set to 0.1, momentum was set to 0.8, and we used a 
 regularization value of 0.0001. Compared to the first MLP model not trained on undrafted players, this model improved that score by 1.588.
-
-
-Initially, we trained Decision Tree, Multi-Layer Perceptron, KNN-Neighbor, and
-Linear Regression models. Each of these had a grid of hyperparameters that was
-exhaustively searched to find the best results, as recorded in Table
-\ref{tab:test_table}.
-
-\begin{table*}
-	\begin{center}
-		\begin{tabular}{||c c c c c c||} 
-		\hline\hline
-		Dataset & Algorithm & Centroid \# & SSE & Size & Silhouette Score \\ 
-		\hline\hline
-		Debug & Single Link HAC & Total & 54.4392 & 200 & 0.3453 \\ \hline
-		Debug & Single Link HAC & 1 & 54.3917 & 195 & \\ \hline
-		Debug & Single Link HAC & 2 & 0.0000 & 1 & \\ \hline
-		Debug & Single Link HAC & 3 & 0.0475 & 2 & \\ \hline
-		Debug & Single Link HAC & 4 & 0.0000 & 1 & \\ \hline
-		Debug & Single Link HAC & 5 & 0.0000 & 1 & \\ \hline
-		\hline\hline
-		\end{tabular}
-	\end{center}
-	\caption{Test table}
-	\label{tab:test_table}
-\end{table*}
 
 \section{Feature and Model Improvements}
 
