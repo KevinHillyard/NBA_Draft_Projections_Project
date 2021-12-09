@@ -24,7 +24,10 @@ def dt():
         writer = csv.writer(f)
         writer.writerow(
             [
-                "me",
+                "me",We trained the model with max depths of either 8, 16, 24, 32, or 48
+layers. In addition we also used a minimum sample size of either 2, 4, or 6
+samples for splits and for leaves. Lastly we set the minimum weight fraction
+leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
                 "iteration",
                 "criterion",
                 "splitter",

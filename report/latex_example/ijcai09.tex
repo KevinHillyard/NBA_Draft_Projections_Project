@@ -71,42 +71,53 @@ Brigham Young University}
   Every year experts attempt to determine which basketball players are the most
   valuable and when those players should be picked in the NBA draft. In this
   paper, we record our efforts to accurately predict where players would be
-  drafted based on their stats using different machine learning models. We first
-  describe by what means our data was gathered and what type of data we
-  gathered. We then review the results we had in predicting a player’s draft
-  position with our different models, namely KNN, decision tree, multi-layer
-  perceptron, and linear regression. We then review our findings, especially
-  from linear regression, in summarizing which statistics were important, and
-  which were not as important. Lastly our ideas for future work and improvements
-  to our research are made known.
+  drafted based on their amatuer statistics using different machine learning
+  models. We first describe by what means our data was gathered and what type of
+  data we gathered. We then review the results we had in predicting a player’s
+  draft position with our different models, namely KNN, decision tree,
+  multi-layer perceptron, and linear regression. We then review our findings,
+  especially from linear regression, in summarizing which statistics were
+  important, and which were not as important. Lastly our ideas for future work
+  and improvements to our research are made known.
 \end{abstract}
 
 \section{Introduction}
 
 NBA scouts are always looking for NBA potential players. When determining how
-good a player is they are almost always compared to past players. Most people
-are able to predict the top 3 to 5 NBA picks from the available players but it
-is nigh impossible to predict each draft pick accurately. 
+good a player is, they are almost always compared to past players. Many analysts
+have a general idea if a player will be a lottery pick, but the late first round
+and second round predictions can vary widely.
 
 In our research we attempted to use machine learning models to predict where a
 player would be drafted. These models use the past 11 years of NBA draft
 results, along with the players’ associated statistics, to determine where the
-player should be drafted if they are to be drafted at all.
+player should be drafted, if they are to be drafted at all.
 
 The models we used were Decision Tree, KNN-Regressor, Linear Regression, and
 Multi-Layer Perceptron (MLP). For each of these models we trained them on three
 different datasets with a variety of hyperparameters. The three datasets we used
 were a variation of our entire dataset. The first dataset only included players
-that were actually drafted, the second included all players both, both drafted
+that were actually drafted, the second included all players, both drafted
 and undrafted, while the third included both drafted and undrafted players but
 without features that were deemed less important.
 
 There was some difficulty in predicting a player’s draft position as it is a
 human perception of that player’s capability and is often swayed by what each
-NBA teams’ current needs are. We were also limited to a certain number of
-players as the era of basketball has changed, encouraging more long range field
-goals compared to years prior. This drastically affects the typical stats for
-players making comparisons between newer and older players less viable.
+NBA teams’ current needs are. A possession-based point guard may have the
+background of a \#15 pick, but if they meet a need of a team picking \#5, they
+may be drafted at that slot. Additionally, human general managers can make
+baffling decisions. In 2012, Anthony Bennett was regarded as a late first round
+pick by the majority of the NBA, perhaps a fringe lottery pick. However, the
+Cleveland Cavaliers, who owned the \#1 pick in the draft, selected him at that
+slot. He proved to be one of the biggest busts in NBA history, failing to even
+make an NBA roster only three years after being the first draft pick. Any
+machine learning model would have difficulty predicting his true draft slot.
+
+The size of our dataset is inherently limited by the size of the NBA draft. We
+were also limited to a certain number of drafts as the era of basketball has
+changed, encouraging more long range field goals compared to years prior. This
+drastically affects the typical stats for players making comparisons between
+newer and older players less viable.
 
 Despite those difficulties we were able to predict a player’s draft position to
 within 10 picks. In a future study if we were to account for the aforementioned
@@ -159,6 +170,15 @@ some positive effects, such as giving the model many examples of poor prospects
 on the higher end of the draft. It would also have negative effects, such as
 leading the models to be biased towards higher pick numbers when it was unsure. 
 
+Most of our chosen features were already real values, and directly translated to
+our final dataset. We had two nominal features, position and league. We decided
+to do a binary encoding for each of these two features, trusting that higher
+complexity models would be able to interpret this and differentiate the value of
+various statistics per position. For example, we would anticipate that the model
+would value rebounds and blocks for a center more than for a point guard. This
+may not be a necessary distinction in the end, but we wanted to give our models
+the chance to pick up on it.
+
 \subsection{Models}
 
 We used a variety of models in this project, to be described in further detail
@@ -168,55 +188,83 @@ in results sections. All implementations came from scikit learn v1.0.1.
 
 Initially, we trained Decision Tree, Multi-Layer Perceptron, KNN-Neighbor, and
 Linear Regression models. Each of these had a grid of hyperparameters that was
-exhaustively searched to find the best results, as recorded in Table
-\ref{tab:test_table}.
+exhaustively searched to find the best results, as recorded in Tables
+\ref{tab:dt_grid}, \ref{tab:mlp_grid}, and \ref{tab:knn_grid}.
 
 \begin{table*}
 	\begin{center}
 		\begin{tabular}{||c c c c c c||} 
 		\hline\hline
-		Dataset & Algorithm & Centroid \# & SSE & Size & Silhouette Score \\ 
+		Hyperparameter & Opt. 1 & Opt. 2 & Opt. 3 & Opt. 4 & Opt. 5 \\ 
 		\hline\hline
-		Debug & Single Link HAC & Total & 54.4392 & 200 & 0.3453 \\ \hline
-		Debug & Single Link HAC & 1 & 54.3917 & 195 & \\ \hline
-		Debug & Single Link HAC & 2 & 0.0000 & 1 & \\ \hline
-		Debug & Single Link HAC & 3 & 0.0475 & 2 & \\ \hline
-		Debug & Single Link HAC & 4 & 0.0000 & 1 & \\ \hline
-		Debug & Single Link HAC & 5 & 0.0000 & 1 & \\ \hline
+		Criterion & Squared Error & Friedman MSE & Absolute Error & Poisson & \\ \hline 
+		Splitter & Best & & & &  \\ \hline
+		Max Depth & 8 & 16 & 24 & 32 & 48 \\ \hline
+		Min Samples for Split & 2 & 4 & 6 & &  \\ \hline
+		Min Samples per Leaf & 1 & 2 & 4 & &  \\ \hline
+		Min Weight Fraction per Leaf & 0.0 & 0.001 & 0.01 & &  \\ \hline
+		Min Impurity Decimal & 0.0 & 0.001 & 0.01 & &  \\
 		\hline\hline
 		\end{tabular}
 	\end{center}
-	\caption{Test table}
-	\label{tab:test_table}
+	\caption{Decision Tree Hyperparameter Grid}
+	\label{tab:dt_grid}
+\end{table*}
+
+\begin{table*}
+	\begin{center}
+		\begin{tabular}{||c c c c c c||} 
+		\hline\hline
+		Hyperparameter & Opt. 1 & Opt. 2 & Opt. 3 & Opt. 4 & Opt. 5 \\ 
+		\hline\hline
+		Hidden Nodes & (64) & (128) & (64, 64) & (64, 32, 64) & (128, 128) \\ \hline
+		Learning Rates & 0.01 & 0.1 & 0.2 & 0.5 & 1.0 \\ \hline
+		Momentum & 0.0 & 0.3 & 0.5 & 0.8 & 1.0 \\ \hline
+		Regularization & 0.0001 & 0.0005 & 0.001 & & \\ 
+		\hline\hline
+		\end{tabular}
+	\end{center}
+	\caption{Multi-Layer Perceptron Hyperparameter Grid}
+	\label{tab:mlp_grid}
+\end{table*}
+
+\begin{table*}
+	\begin{center}
+		\begin{tabular}{||c c c c c||} 
+		\hline\hline
+		Hyperparameter & Opt. 1 & Opt. 2 & Opt. 3 & Opt. 4 \\ 
+		\hline\hline
+		K & 1 & 3 & 5 & 7 \\ \hline
+		K continued & 9 & 11 & 13 & 15 \\ \hline
+		Distance Metrics & Euclidean & Manhattan & Chebyshev & Minkowski \\ \hline
+		\hline\hline
+		\end{tabular}
+	\end{center}
+	\caption{K-Nearest Neighbors Hyperparameter Grid}
+	\label{tab:knn_grid}
 \end{table*}
 
 \subsection{Without Undrafted Players}
 
-When training our models on the dataset excluding all undrafted players the Mean
-Absolute Error (MAE) for each model was higher when compared to the same model
-trained on the entire dataset. An issue we found with this subset was that there
-were not enough bad players for the models to learn with. Seeing as how a little
-more than half of the players in the data were undrafted the draft prediction
-for these players most likely contributed to the higher errors.
+We first trained our models on the dataset excluding all undrafted players. The
+Mean Absolute Error (MAE) was fairly high, with an average of about 15 across
+all hyperparameter combinations, and with minimums of about 12 picks off for the
+best model and hyperparameter combinations. An issue we found with this subset
+was that there were not enough bad players for the models to learn form. 
 
 \subsection{Decision Tree}
 
-After training the decision tree model on this subset it achieved a MAE of
-13.689. We trained the model with max depths of either 8, 16, 24, 32, or 48
-layers. In addition we also used a minimum sample size of either 2, 4, or 6
-samples for splits and for leaves. Lastly we set the minimum weight fraction
-leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
-The hyperparameters with which we achieved the best score had max depth set to 8
-layers, minimum samples set to 6 and 4 for split and leaf respectively, and both
-the minimum weight fraction leaf and minimum impurity decrease set to 0.01.
+After training the decision tree model on this subset it achieved a minimum MAE
+of 13.689. The hyperparameters with which we achieved the best score used
+poisson as the criterion, a max depth of 8 layers, minimum samples set to 6 and
+4 for split and leaf respectively, and both the minimum weight fraction leaf and
+minimum impurity decrease set to 0.01.
 
 \subsection{KNN-Regressor}
 
 When training our KNN-Regressor on the subset excluding undrafted players it
-achieved a MAE of 13.129. During the training of this model we used odd values
-from 1 tp 11 for k and a distance metric of either manhattan, chebyshev,
-euclidean, or minkowski. We achieved the best MAE when setting k to 9 and using
-a manhattan distance metric.
+achieved a minimum MAE of 13.129. We achieved the best MAE when setting k to 9
+and using a manhattan distance metric.
 
 \subsection{Linear Regression}
 
@@ -226,12 +274,8 @@ hyperparameters were used for this model.
 \subsection{MLP}
 
 The last model which we trained on this subset of data was our MLP. It achieved
-a MAE of 11.439. When training this model we used the following values for
-hidden nodes: 32, 64, 128, (16,16), (16,32,16), (32,32), (8,16,8), (8,8), and
-(8,8,8). We also set the learning rate to 0.1 or 0.2. Momentum was set to a
-value of either 0.3, 0.5, or 0.8. Lastly we used Regularization values of
-0.0001, 0.0005, or 0.001. The combination of hyperparameters that achieved the
-best MAE had hidden nodes set to (8,8), a learning rate of 0.1, a momentum of
+a MAE of 11.490. The combination of hyperparameters that achieved the
+best MAE had hidden nodes set to (64, 64), a learning rate of 0.2, a momentum of
 0.5, and regularization of 0.0001.
 
 \subsection{With Drafted and Undrafted Players}
@@ -245,17 +289,18 @@ to recognize both good and bad players and was more accurate as a result.
 When training the decision tree on both drafted and undrafted players it
 achieved a MAE of 9.560. This is an improvement from 13.689 MAE that was
 achieved using the subset without undrafted players. This score would prove to
-be our best overall score. We used the same hyperparameters mentioned before and
-the best score was achieved when using the following settings: max depth set to
-8 layers, the minimum samples for splits set to 4 while the minimum samples for
-leaves was set to 1, the minimum weight fraction leaf set to 0.01, and the
-minimum impurity decrease set to 0.001.
+be our best overall score in our initial training. We used the same
+hyperparameters mentioned before and the best score was achieved when using the
+following settings: absolute error as the criterion, max depth set to 8 layers,
+the minimum samples for splits set to 4 while the minimum samples for leaves was
+set to 1, the minimum weight fraction leaf set to 0.01, and the minimum impurity
+decrease set to 0.001.
 
 \subsection{KNN-Regressor}
 
 The KNN-Regressor when trained on both drafted and undrafted players achieved a
-MAE of 11.699. This is 1.43 better than the previous KNN-Regressor model. This
-score would be the worst score for all models trained on both drafted and
+MAE of 11.699. This is 1.43 picks better than the previous KNN-Regressor model.
+This score would be the worst score for all models trained on both drafted and
 undrafted players. The score was achieved using the same hyperparameters as
 before but with a k value of 3 using a euclidean distance metric.
 
@@ -274,9 +319,23 @@ was set to 0.8, and we used a regularization value of 0.0001. Compared to the
 first MLP model not trained on undrafted players, this model improved that score
 by 1.588.
 
-\section{Feature and Model Improvements}
+\subsection{Summary of Initial Results}
 
-\subsection{Improvements}
+Figure \ref{fig:initial_results} shows a visual for the best results for our
+initial models. The models trained with the undrafted players included performed
+much better on average. However, there wasn't much differentiation between the
+MLP, Decision Tree, and Linear Regression models with that dataset, suggesting
+that none had a particular advantage for our compiled datasets.
+
+\begin{figure}
+	\begin{center}
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{error_by_model.pdf}}
+    \caption{Bar Chart of Mean Absolute Error for Each Initial Model}
+    \label{fig:initial_results}
+	\end{center}
+\end{figure}
+
+\section{Feature and Model Improvements}
 
 To improve our results we reviewed the most important features and least
 important features as determined by the weights from our linear regression
@@ -287,7 +346,12 @@ these features safe to remove as they had low weights and the essence of their
 value was captured in a different feature. For example, Field Goals Made and
 Field Goals Attempted is captured in the feature Field Goal \% which had a high
 weight. In removing these somewhat redundant features we hoped to slightly
-improve our predictions.
+improve our predictions, especially for the KNN model. We didn't weight the
+values of various features when calculating the distance between neighbors, so
+if we had many redundant or useless features, they would drown out the important
+features and make it difficult for the KNN model to be effective.
+
+\section{Final Results}
 
 \subsection{Decision Tree}
 
@@ -325,7 +389,15 @@ hyperparameters: the hidden nodes were set to (32,32), the learning rate was
 0.1, momentum was set to 0.8, and we used a regularization value of 0.001.
 
 \subsection{Improvement Results}
-%Maybe this belongs in final results?
+
+\begin{figure}
+	\begin{center}
+	\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{error_by_model_2.pdf}}
+    \caption{Bar Chart of Mean Absolute Error Including Smaller Dataset Results}
+    \label{fig:improved_results}
+	\end{center}
+\end{figure}
+
 The changes we made with our improvements initially surprised us as the MAE for
 each model trained on the adjusted dataset was almost identical to, if not
 slightly higher than, the MAE scores for the models trained on the unaltered
@@ -333,14 +405,14 @@ dataset with both drafted and undrafted players. Reviewing these results they do
 match up with the behavior of the models we chose. All of our models, aside from
 the KNN-Regressor, are capable of learning to ignore unnecessary features. By
 removing features the linear regressor deemed less useful we most likely only
-reduced the learning our models needed to do in order to ignore those features.
-Concerning our KNN-Regressor the consistently high MAE was likely due to our
-data having poor quality of neighbors. This will be discussed further in the
-Final Resutls section
-
-\section{Final Results}
+reduced the training time for our models. Concerning our KNN-Regressor the
+consistently high MAE was likely due to not having enough data to effectively
+make predictions from neighboring instances. This will be discussed further in
+the Final Results section.
 
 \section{Discussion and Conclusion}
+
+
 
 \section{Future Work}
 
@@ -355,18 +427,34 @@ player’s draft stock that we did not take into account when gathering our data
 When gathering our data and when a player was drafted it would be worthwhile to
 research the team’s needs that drafted that player. Knowing this would allow us
 to determine if the player was drafted at that position for their skills as a
-player or more for their fit with that team.
+player or more for their fit with that team. 
+
+Additionally, we could do player comparisons with existing NBA players. This is
+a common draft tactic used by general managers, and it might be helpful for the
+models as well. This would involve gathering player profiles of successful and
+unsuccessful NBA players, and using their similarity to NBA prospects to
+determine if that prospect might be valued in the modern NBA.
+
+Finally, we could improve the size of our dataset by including more drafts. This
+is initially unhelpful because the shifting nature of the NBA leads to certain
+players being very valuable 40 years ago and insignificant today, and vice
+versa. We would have to do era adjustments on any datasets that included older
+generations and thoroughly test the effectiveness of this approach.
 
 \subsection{Error Scoring}
 
 There was an issue with the error scoring with our models as we were using the
 scikit models with their own error scoring function. Because undrafted players
-don’t have a draft position associated with them we edited our data so that all
-undrafted players were drafted 61st. The issue appears when our models predict a
-draft position greater than 61. Our data has a max of 61 while our models are
-able to predict draft positions higher than this. The error scoring considers
-this difference as an error when in reality if the player has a draft position
-of 61 any placement greater than or equal to 61 should be considered correct. 
+don’t have a draft position associated with them we imputed their labels so that
+all undrafted players were drafted 61st. 
+
+The issue appears when our models predict a draft position greater than 61. Our
+data has a max of 61 while our models are able to predict draft positions higher
+than this. The error scoring for the models considers this difference as an
+error, when in reality if the player has a draft position of 61 any placement
+greater than or equal to 61 should be considered correct. A custom error scoring
+module that plugged in to skicit learns models could dramatically improve our
+results.
 
 \subsection{Additional Features/Sources}
 

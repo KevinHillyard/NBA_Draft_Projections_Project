@@ -60,7 +60,7 @@ def graph_best_models():
     plt.xlabel("Model Name")
     plt.title("Mean Absolute Error Using Ten-Fold Cross Validation")
     plt.tight_layout()
-    plt.savefig("./files/error_by_model_2.png")
+    plt.savefig("./files/error_by_model_2.pdf")
 
 
 if __name__ == "__main__":
