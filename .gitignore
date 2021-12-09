@@ -129,12 +129,13 @@ venv2/
 .DS_Store
 
 # Latex artifacts
-**/main.pdf
-**/main.aux
-**/main.fdb_latexmk
-**/main.fls
-**/main.synctex.gz
+**/ijcai09.pdf
+**/ijcai09.aux
+**/ijcai09.fdb_latexmk
+**/ijcai09.fls
+**/ijcai09.synctex.gz
+**/ijcai09.bib
 
 
-# VS Code
+# VS Code settings
 .vscode
