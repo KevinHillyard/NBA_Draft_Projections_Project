@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1639072807 "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf" "ijcai09" 1639072809
+["pdflatex"] 1639073391 "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf" "ijcai09" 1639073391
   "/etc/texmf/web2c/texmf.cnf" 1630289531 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.aux" 1639072809 4171 33f4cbf954a05e88789494b8efa8c620 ""
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" 1639072806 24089 8351efe8859a52b9bc531b616901e7c3 ""
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.aux" 1639073391 4171 33f4cbf954a05e88789494b8efa8c620 ""
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.tex" 1639073390 24162 0052d2c1e5640d385b2f453224cd9ace ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1136768653 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -61,13 +61,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1631027678 4856172 17904a52973240b44a2e5720d5f9ac05 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1631028195 1313554 80fbe100948663a6d560076a1d98e525 ""
   "error_by_model.pdf" 1639069893 14933 af5defd98296fd682d7635fa39529c94 ""
-  "error_by_model_2.pdf" 1639071035 17196 2312fedf5db617d1bb7cb7cf8199b552 ""
-  "ijcai09.aux" 1639072809 4171 33f4cbf954a05e88789494b8efa8c620 "pdflatex"
+  "error_by_model_2.pdf" 1639073292 16702 79b1ca94e3f67fe36e9027c2fae89a9c ""
+  "ijcai09.aux" 1639073391 4171 33f4cbf954a05e88789494b8efa8c620 "pdflatex"
   "ijcai09.sty" 1484685459 13541 87403d2cee1cbfa44d11b374154ec18b ""
-  "ijcai09.tex" 1639072806 24089 8351efe8859a52b9bc531b616901e7c3 ""
+  "ijcai09.tex" 1639073390 24162 0052d2c1e5640d385b2f453224cd9ace ""
   (generated)
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.log"
-  "ijcai09.pdf"
-  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf"
   "ijcai09.log"
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.log"
+  "/home/bdg/school/NBA_Draft_Projections_Project/report/latex_example/ijcai09.pdf"
   "ijcai09.aux"
+  "ijcai09.pdf"

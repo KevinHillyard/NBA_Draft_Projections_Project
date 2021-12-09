@@ -5,12 +5,22 @@ from arff_utils import Arff_Utils
 
 
 def mlp():
-    hidden_nodes_options = [(64), (128), (64, 64), (64, 32, 64), (128, 128)]
+    hidden_nodes_options = [
+        (32),
+        (64),
+        (128),
+        (8, 8),
+        (16, 16),
+        (32, 32),
+        (8, 16, 8),
+        (16, 32, 16),
+        (8, 8, 8),
+    ]
     lrs = [0.1, 0.2]
     momentums = [0.3, 0.5, 0.8]
     regularization = [0.0001, 0.0005, 0.001]
     with open(
-        r"./files/grid_search_mlp_hn_include_undrafted.csv",
+        r"./files/grid_search_mlp_3.csv",
         "w",
         encoding="UTF8",
         newline="",
@@ -28,7 +38,7 @@ def mlp():
             ]
         )
         for iteration in range(3):
-            x, y = Arff_Utils.get_all_players_as_numpy(include_undrafted=True)
+            x, y = Arff_Utils.get_all_players_as_numpy(use_smaller=True)
             for hn_ in hidden_nodes_options:
                 for lr_ in lrs:
                     for momentum_ in momentums:
@@ -37,9 +47,8 @@ def mlp():
                                 hidden_layer_sizes=hn_,
                                 alpha=reg_,
                                 learning_rate_init=lr_,
-                                max_iter=1000000,
+                                max_iter=10000,
                                 momentum=momentum_,
-                                early_stopping=True,
                             )
                             me = Arff_Utils.ten_fold_cross_validation(mlp_model, x, y)
                             result_row = [
