@@ -258,7 +258,37 @@ these features safe to remove as they had low weights and the essence of their
 statistic was captured in a different feature. For example, Field Goals Made and
 Field Goals Attempted is captured in the feature Field Goal \% which has a high
 weight. In removing these somewhat redundant features we were able to slightly
-improve our predictions. 
+improve our predictions.
+
+\subsection{Decision Tree}
+
+When training a Decision Tree model on this new dataset we were able to achieve a MAE of 9.718.
+This was the best score from all of the models trained on this new dataset but was 0.158 higher than 
+the Decision Tree trained on the unaltered dataset with both drafted and undrafted players. 
+This would be the second best score from all of our results. This score was achieved using the following 
+hyperparameters: a maximum depth of 8 layers, a minimum sample of 2 for splits and 1 for leaves, 
+minimum weight fraction leaf of 0.01, and a minimum impurity decrease of 0.01.
+
+\subsection{KNN-Regressor}
+
+The KNN-Regressor trained on the new dataset had the worst score of all models trained on this dataset.
+It had a MAE of 11.790. This was better than the first model trained on the data without undrafted players, 
+but worse than the model trained on all players. This score was achieved using a k value of 2 and using a 
+euclidean distance metric.
+
+\subsection{Linear Regression}
+
+Training the Linear Regression model on this new dataset resulted in a MAE of 9.987. This was 
+the second worst of all models trained on this dataset but was better than the other two Linear 
+Regression models trained on the other datasets.
+
+\subsection{MLP}
+
+Lastly our MLP trained on this new dataset resulted in a MAE of 9.858. This was only 0.007 worse 
+than the model trained on the unaltered dataset with all players. This was the second best score of 
+all models trained on the new dataset and the fourth best overall. The score was achieved by using 
+the following hyperparameters: the hidden nodes were set to (32,32), the learning rate was 0.1, 
+momentum was set to 0.8, and we used a regularization value of 0.001.
 
 
 \section{Final Results}
