@@ -442,14 +442,27 @@ hyperparameters: the hidden nodes were set to (32,32), the learning rate was
 The changes we made with our improvements initially surprised us as the MAE for
 each model trained on the adjusted dataset was almost identical to, if not
 slightly higher than, the MAE scores for the models trained on the unaltered
-dataset with both drafted and undrafted players. Reviewing these results they do
-match up with the behavior of the models we chose. All of our models, aside from
-the KNN-Regressor, are capable of learning to ignore unnecessary features. By
-removing features the linear regressor deemed less useful we most likely only
-reduced the training time for our models. Concerning our KNN-Regressor the
-consistently high MAE was likely due to not having enough data to effectively
-make predictions from neighboring instances. This will be discussed further in
-the Final Results section.
+dataset with both drafted and undrafted players. 
+
+Reviewing these results they do match up with the behavior of the models we
+chose. All of our models, aside from the KNN-Regressor, are capable of learning
+to ignore unnecessary features. For example, the MLP model may have just zeroed
+out the weights for the features we deemed redundant. By removing features the
+linear regressor deemed less useful we most likely only reduced the training
+time for our models.
+
+Concerning our KNN-Regressor, the consistently high MAE was likely due to not
+having enough data to effectively make predictions from neighboring instances,
+while also potentially having the distance metric being diluted by unnecessary
+features. For example, we only had about 50 top 5 picks in our dataset. These
+represent a wide variety of player types, from polished products, like Anthony
+Davis, to prospects being drafted purely on upside, such as Joel Embiid. With
+such a wide variety of prospect types and positions, our dataset was most likely
+too small for the KNN models to effectively make predictions based on
+neighboring prospects. A certain prospect at a specific height, shooting
+percentages, and rebounding skill may only have one true neighbor. This makes
+the KNN model highly susceptible to noise, and as such the KNN models performed
+the worst on average.
 
 \section{Discussion and Conclusion}
 
