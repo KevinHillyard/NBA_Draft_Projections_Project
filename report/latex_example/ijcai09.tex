@@ -93,12 +93,13 @@ player would be drafted. These models use the past 11 years of NBA draft
 results, along with the players’ associated statistics, to determine where the
 player should be drafted if they are to be drafted at all.
 
-The models we used were Decision Tree, KNN-Regressor, Linear Regression, 
-and Multi-Layer Perceptron (MLP). For each of these models we trained them on three 
-different datasets with a variety of hyperparameters. The three datasets we used were 
-a variation of our entire dataset. The first dataset only included players that were actually 
-drafted, the second included all players both, both drafted and undrafted, while the third included 
-both drafted and undrafted players but without features that were deemed less important.
+The models we used were Decision Tree, KNN-Regressor, Linear Regression, and
+Multi-Layer Perceptron (MLP). For each of these models we trained them on three
+different datasets with a variety of hyperparameters. The three datasets we used
+were a variation of our entire dataset. The first dataset only included players
+that were actually drafted, the second included all players both, both drafted
+and undrafted, while the third included both drafted and undrafted players but
+without features that were deemed less important.
 
 There was some difficulty in predicting a player’s draft position as it is a
 human perception of that player’s capability and is often swayed by what each
@@ -191,73 +192,87 @@ exhaustively searched to find the best results, as recorded in Table
 
 \subsection{Without Undrafted Players}
 
-When training our models on the dataset excluding all undrafted players the Mean Absolute Error (MAE) 
-for each model was higher when compared to the same model trained on the entire dataset. 
-An issue we found with this subset was that there were not enough bad players for the models to learn with.
-Seeing as how a little more than half of the players in the data were undrafted the draft prediction 
+When training our models on the dataset excluding all undrafted players the Mean
+Absolute Error (MAE) for each model was higher when compared to the same model
+trained on the entire dataset. An issue we found with this subset was that there
+were not enough bad players for the models to learn with. Seeing as how a little
+more than half of the players in the data were undrafted the draft prediction
 for these players most likely contributed to the higher errors.
 
 \subsection{Decision Tree}
 
-After training the decision tree model on this subset it achieved a MAE of 13.689. 
-We trained the model with max depths of either 8, 16, 24, 32, or 48 layers. In addition we also used 
-a minimum sample size of either 2, 4, or 6 samples for splits and for leaves. Lastly we set the minimum 
-weight fraction leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
-The hyperparameters with which we achieved the best score had max depth set to 8 layers, 
-minimum samples set to 6 and 4 for split and leaf respectively, and both the minimum weight 
-fraction leaf and minimum impurity decrease set to 0.01.
+After training the decision tree model on this subset it achieved a MAE of
+13.689. We trained the model with max depths of either 8, 16, 24, 32, or 48
+layers. In addition we also used a minimum sample size of either 2, 4, or 6
+samples for splits and for leaves. Lastly we set the minimum weight fraction
+leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
+The hyperparameters with which we achieved the best score had max depth set to 8
+layers, minimum samples set to 6 and 4 for split and leaf respectively, and both
+the minimum weight fraction leaf and minimum impurity decrease set to 0.01.
 
 \subsection{KNN-Regressor}
 
-When training our KNN-Regressor on the subset excluding undrafted players it achieved a MAE of 13.129.
-During the training of this model we used odd values from 1 tp 11 for k and a distance metric of 
-either manhattan, chebyshev, euclidean, or minkowski.
-We achieved the best MAE when setting k to 9 and using a manhattan distance metric.
+When training our KNN-Regressor on the subset excluding undrafted players it
+achieved a MAE of 13.129. During the training of this model we used odd values
+from 1 tp 11 for k and a distance metric of either manhattan, chebyshev,
+euclidean, or minkowski. We achieved the best MAE when setting k to 9 and using
+a manhattan distance metric.
 
 \subsection{Linear Regression}
 
-The MAE our Linear Regression model achieved was a value of 11.265.
-No special hyperparameters were used for this model.
+The MAE our Linear Regression model achieved was a value of 11.265. No special
+hyperparameters were used for this model.
 
 \subsection{MLP}
 
-The last model which we trained on this subset of data was our MLP. It achieved a MAE of 11.439.
-When training this model we used the following values for hidden nodes: 32, 64, 128, (16,16), (16,32,16), (32,32), (8,16,8), (8,8), and (8,8,8).
-We also set the learning rate to 0.1 or 0.2. Momentum was set to a value of either 0.3, 0.5, or 0.8. 
-Lastly we used Regularization values of 0.0001, 0.0005, or 0.001.
-The combination of hyperparameters that achieved the best MAE had hidden nodes set to (8,8), a learning rate of 0.1,
-a momentum of 0.5, and regularization of 0.0001.
+The last model which we trained on this subset of data was our MLP. It achieved
+a MAE of 11.439. When training this model we used the following values for
+hidden nodes: 32, 64, 128, (16,16), (16,32,16), (32,32), (8,16,8), (8,8), and
+(8,8,8). We also set the learning rate to 0.1 or 0.2. Momentum was set to a
+value of either 0.3, 0.5, or 0.8. Lastly we used Regularization values of
+0.0001, 0.0005, or 0.001. The combination of hyperparameters that achieved the
+best MAE had hidden nodes set to (8,8), a learning rate of 0.1, a momentum of
+0.5, and regularization of 0.0001.
 
 \subsection{With Drafted and Undrafted Players}
 
-As already mentioned the following models achieved a better MAE when using both drafted and undafted players. 
-The variety of talent allowed the models to learn to recognize both good and bad players and was more accurate as a result.
+As already mentioned the following models achieved a better MAE when using both
+drafted and undafted players. The variety of talent allowed the models to learn
+to recognize both good and bad players and was more accurate as a result.
 
 \subsection{Decision Tree}
 
-When training the decision tree on both drafted and undrafted players it achieved a MAE of 9.560. 
-This is an improvement from 13.689 MAE that was achieved using the subset without undrafted players.
-This score would prove to be our best overall score. We used the same hyperparameters mentioned before and the
-best score was achieved when using the following settings: max depth set to 8 layers, 
-the minimum samples for splits set to 4 while the minimum samples for leaves was set to 1, the minimum weight fraction leaf 
-set to 0.01, and the minimum impurity decrease set to 0.001.
+When training the decision tree on both drafted and undrafted players it
+achieved a MAE of 9.560. This is an improvement from 13.689 MAE that was
+achieved using the subset without undrafted players. This score would prove to
+be our best overall score. We used the same hyperparameters mentioned before and
+the best score was achieved when using the following settings: max depth set to
+8 layers, the minimum samples for splits set to 4 while the minimum samples for
+leaves was set to 1, the minimum weight fraction leaf set to 0.01, and the
+minimum impurity decrease set to 0.001.
 
 \subsection{KNN-Regressor}
 
-The KNN-Regressor when trained on both drafted and undrafted players achieved a MAE of 11.699. This is 1.43 better than 
-the previous KNN-Regressor model. This score would be the worst score for all models trained on both drafted and undrafted players.
-The score was achieved using the same hyperparameters as before but with a k value of 3 using a euclidean distance metric.
+The KNN-Regressor when trained on both drafted and undrafted players achieved a
+MAE of 11.699. This is 1.43 better than the previous KNN-Regressor model. This
+score would be the worst score for all models trained on both drafted and
+undrafted players. The score was achieved using the same hyperparameters as
+before but with a k value of 3 using a euclidean distance metric.
 
 \subsection{Linear Regression}
 
-Our Linear Regression model had the third best initial score with a MAE of 10.091. This is an improvement from the previous 
-Linear Regression model that scored 11.265.
+Our Linear Regression model had the third best initial score with a MAE of
+10.091. This is an improvement from the previous Linear Regression model that
+scored 11.265.
 
 \subsection{MLP}
 
-Lastly our MLP had the second best initial score with a MAE of 9.851. It used the same hyperparameters as the previous MLP model, 
-but had the following settings: hidden nodes was set to 128, learning rate was set to 0.1, momentum was set to 0.8, and we used a 
-regularization value of 0.0001. Compared to the first MLP model not trained on undrafted players, this model improved that score by 1.588.
+Lastly our MLP had the second best initial score with a MAE of 9.851. It used
+the same hyperparameters as the previous MLP model, but had the following
+settings: hidden nodes was set to 128, learning rate was set to 0.1, momentum
+was set to 0.8, and we used a regularization value of 0.0001. Compared to the
+first MLP model not trained on undrafted players, this model improved that score
+by 1.588.
 
 \section{Feature and Model Improvements}
 
@@ -276,44 +291,52 @@ improve our predictions.
 
 \subsection{Decision Tree}
 
-When training a Decision Tree model on this new dataset we were able to achieve a MAE of 9.718.
-This was the best score from all of the models trained on this new dataset but was 0.158 higher than 
-the Decision Tree trained on the unaltered dataset with both drafted and undrafted players. 
-This would be the second best score from all of our results. This score was achieved using the following 
-hyperparameters: a maximum depth of 8 layers, a minimum sample of 2 for splits and 1 for leaves, 
-minimum weight fraction leaf of 0.01, and a minimum impurity decrease of 0.01.
+When training a Decision Tree model on this new dataset we were able to achieve
+a MAE of 9.718. This was the best score from all of the models trained on this
+new dataset but was 0.158 higher than the Decision Tree trained on the unaltered
+dataset with both drafted and undrafted players. This would be the second best
+score from all of our results. This score was achieved using the following
+hyperparameters: a maximum depth of 8 layers, a minimum sample of 2 for splits
+and 1 for leaves, minimum weight fraction leaf of 0.01, and a minimum impurity
+decrease of 0.01.
 
 \subsection{KNN-Regressor}
 
-The KNN-Regressor trained on the new dataset had the worst score of all models trained on this dataset.
-It had a MAE of 11.790. This was better than the first model trained on the data without undrafted players, 
-but worse than the model trained on all players. This score was achieved using a k value of 2 and using a 
+The KNN-Regressor trained on the new dataset had the worst score of all models
+trained on this dataset. It had a MAE of 11.790. This was better than the first
+model trained on the data without undrafted players, but worse than the model
+trained on all players. This score was achieved using a k value of 2 and using a
 euclidean distance metric.
 
 \subsection{Linear Regression}
 
-Training the Linear Regression model on this new dataset resulted in a MAE of 9.987. This was 
-the second worst of all models trained on this dataset but was better than the other two Linear 
-Regression models trained on the other datasets.
+Training the Linear Regression model on this new dataset resulted in a MAE of
+9.987. This was the second worst of all models trained on this dataset but was
+better than the other two Linear Regression models trained on the other
+datasets.
 
 \subsection{MLP}
 
-Lastly our MLP trained on this new dataset resulted in a MAE of 9.858. This was only 0.007 worse 
-than the model trained on the unaltered dataset with all players. This was the second best score of 
-all models trained on the new dataset and the fourth best overall. The score was achieved by using 
-the following hyperparameters: the hidden nodes were set to (32,32), the learning rate was 0.1, 
-momentum was set to 0.8, and we used a regularization value of 0.001.
+Lastly our MLP trained on this new dataset resulted in a MAE of 9.858. This was
+only 0.007 worse than the model trained on the unaltered dataset with all
+players. This was the second best score of all models trained on the new dataset
+and the fourth best overall. The score was achieved by using the following
+hyperparameters: the hidden nodes were set to (32,32), the learning rate was
+0.1, momentum was set to 0.8, and we used a regularization value of 0.001.
 
 \subsection{Improvement Results}
 %Maybe this belongs in final results?
-The changes we made with our improvements initially surprised us as the MAE for each model trained 
-on the adjusted dataset was almost identical to, if not slightly higher than, the MAE scores for the models trained on the unaltered 
-dataset with both drafted and undrafted players. Reviewing these results they do match up with the 
-behavior of the models we chose. All of our models, aside from the KNN-Regressor, are capable of learning 
-to ignore unnecessary features. By removing features the linear regressor deemed less useful we most likely only reduced 
-the learning our models needed to do in order to ignore those features.
-Concerning our KNN-Regressor the consistently high MAE was likely due to our data having poor quality of neighbors. This 
-will be discussed further in the Final Resutls section
+The changes we made with our improvements initially surprised us as the MAE for
+each model trained on the adjusted dataset was almost identical to, if not
+slightly higher than, the MAE scores for the models trained on the unaltered
+dataset with both drafted and undrafted players. Reviewing these results they do
+match up with the behavior of the models we chose. All of our models, aside from
+the KNN-Regressor, are capable of learning to ignore unnecessary features. By
+removing features the linear regressor deemed less useful we most likely only
+reduced the learning our models needed to do in order to ignore those features.
+Concerning our KNN-Regressor the consistently high MAE was likely due to our
+data having poor quality of neighbors. This will be discussed further in the
+Final Resutls section
 
 \section{Final Results}
 
