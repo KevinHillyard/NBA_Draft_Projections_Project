@@ -179,6 +179,33 @@ would value rebounds and blocks for a center more than for a point guard. This
 may not be a necessary distinction in the end, but we wanted to give our models
 the chance to pick up on it.
 
+A complete list of features is listed in Table \ref{tab:features}.
+
+\begin{table*}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|} 
+		\hline\hline
+		Position & Height & Weight & Age \\ \hline
+		League (NCAA, International, G-League) & Games Played & Games Started & Minutes \\ \hline
+		Field Goal \% & 3 Pointers Made & 3 Pointers Attempted & 3 Point \% \\ \hline
+		Free Throws Made & Free Throws Attempted & Free Throw & Field Goals Made \\ \hline
+		Field Goals Attempted & Offensive Rebounds & Defensive Rebounds & Total Rebounds  \\ \hline
+		Assists & Steals & Blocks & Personal Fouls \\ \hline
+		Turnovers & Points & True Shooting \% & Effective Field Goal \\ \hline
+		Offensive Rebounding \% & Defensive Rebounding \% & Total Rebounding \% & Assist \% \\ \hline
+		Turnover \% & Steal \% & Block \% & Usage \% \\ \hline
+		Total Shooting \% & Pure Point Rating & Points Per Shot & Offensive Rating \\ \hline
+		Defensive Rating & Player Efficiency Rating & & \\ 
+		\hline\hline
+		\end{tabular}
+	\end{center}
+	\caption{Full List of Features Used}
+	\label{tab:features}
+\end{table*}
+
+
+
+
 \subsection{Models}
 
 We used a variety of models in this project, to be described in further detail
