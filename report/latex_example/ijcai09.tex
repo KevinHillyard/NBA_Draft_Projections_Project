@@ -70,7 +70,7 @@ Brigham Young University}
 \begin{abstract}
   Every year experts attempt to determine which basketball players are the most
   valuable and when those players should be picked in the NBA draft. In this
-  paper, we record our efforts to accurately predict where players should be
+  paper, we record our efforts to accurately predict where players would be
   drafted based on their stats using different machine learning models. We first
   describe by what means our data was gathered and what type of data we
   gathered. We then review the results we had in predicting a player’s draft
@@ -92,6 +92,13 @@ In our research we attempted to use machine learning models to predict where a
 player would be drafted. These models use the past 11 years of NBA draft
 results, along with the players’ associated statistics, to determine where the
 player should be drafted if they are to be drafted at all.
+
+The models we used were Decision Tree, KNN-Regressor, Linear Regression, 
+and Multi-Layer Perceptron (MLP). For each of these models we trained them on three 
+different datasets with a variety of hyperparameters. The three datasets we used were 
+a variation of our entire dataset. The first dataset only included players that were actually 
+drafted, the second included all players both, both drafted and undrafted, while the third included 
+both drafted and undrafted players but without features that were deemed less important.
 
 There was some difficulty in predicting a player’s draft position as it is a
 human perception of that player’s capability and is often swayed by what each
@@ -184,24 +191,31 @@ exhaustively searched to find the best results, as recorded in Table
 
 \subsection{Without Undrafted Players}
 
-We trained our models on two separate versions of our dataset. One dataset did not include
-the undrafted players. When training on this dataset the Mean Absolute Error (MAE) for each model was higher 
-when compared to the models trained on the entire dataset. An issue we found with this subset was that there
-were not enough bad players for the models to learn with.
+When training our models on the dataset excluding all undrafted players the Mean Absolute Error (MAE) 
+for each model was higher when compared to the same model trained on the entire dataset. 
+An issue we found with this subset was that there were not enough bad players for the models to learn with.
+Seeing as how a little more than half of the players in the data were undrafted the draft prediction 
+for these players most likely contributed to the higher errors.
 
 \subsection{Decision Tree}
 
 After training the decision tree model on this subset it achieved a MAE of 13.689. 
-We trained the model with max depths of either 8, 16, 24, 32, or 48 layers. In addition we also used a minimum sample size of either 2, 4, or 6 samples 
-for splits and for leaves. Lastly we set the minimum weight fraction leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
-The hyperparameters with which we achieved the best score had max depth set to 8 layers, minimum samples set to 6 and 4 for split and leaf respectively, and both the minimum weight fraction leaf and minimum impurity decrease set to 0.01.
+We trained the model with max depths of either 8, 16, 24, 32, or 48 layers. In addition we also used 
+a minimum sample size of either 2, 4, or 6 samples for splits and for leaves. Lastly we set the minimum 
+weight fraction leaf and the minimum impurity decrease to values of either 0, 0.01, or 0.001.
+The hyperparameters with which we achieved the best score had max depth set to 8 layers, 
+minimum samples set to 6 and 4 for split and leaf respectively, and both the minimum weight 
+fraction leaf and minimum impurity decrease set to 0.01.
 
 \subsection{KNN-Regressor}
 
 When training our KNN-Regressor on the subset excluding undrafted players it achieved a MAE of 13.129.
-During the training of this model we used odd values from 1 tp 11 for k and a distance metric of either manhattan, chebyshev, euclidean, or minkowski.
+During the training of this model we used odd values from 1 tp 11 for k and a distance metric of 
+either manhattan, chebyshev, euclidean, or minkowski.
 We achieved the best MAE when setting k to 9 and using a manhattan distance metric.
+
 \subsection{Linear Regression}
+
 The MAE our Linear Regression model achieved was a value of 11.265.
 No special hyperparameters were used for this model.
 
@@ -223,21 +237,21 @@ The variety of talent allowed the models to learn to recognize both good and bad
 
 When training the decision tree on both drafted and undrafted players it achieved a MAE of 9.560. 
 This is an improvement from 13.689 MAE that was achieved using the subset without undrafted players.
-This score would prove to be our best initial score. We used the same hyperparameters mentioned before and the
-best score was achieved when using the following settings: max depth was set to 8 layers, 
-the min samples for splits was set to 4 while the min samples for leaves was set to 1, the minimum weight fraction leaf 
-was set to 0.01, and the minimum impurity decrease was set to 0.001.
+This score would prove to be our best overall score. We used the same hyperparameters mentioned before and the
+best score was achieved when using the following settings: max depth set to 8 layers, 
+the minimum samples for splits set to 4 while the minimum samples for leaves was set to 1, the minimum weight fraction leaf 
+set to 0.01, and the minimum impurity decrease set to 0.001.
 
 \subsection{KNN-Regressor}
 
 The KNN-Regressor when trained on both drafted and undrafted players achieved a MAE of 11.699. This is 1.43 better than 
-the previous model. This score would be the worst initial score for all models trained on both drafted and undrafted players.
+the previous KNN-Regressor model. This score would be the worst score for all models trained on both drafted and undrafted players.
 The score was achieved using the same hyperparameters as before but with a k value of 3 using a euclidean distance metric.
 
 \subsection{Linear Regression}
 
 Our Linear Regression model had the third best initial score with a MAE of 10.091. This is an improvement from the previous 
-Linear Regression model that scored 11.265, but is in the bottom half of models trained on both drafted and undrafted players.
+Linear Regression model that scored 11.265.
 
 \subsection{MLP}
 
@@ -255,9 +269,9 @@ model. The features that had the lowest weights included the following features:
 Usage \%, Assist \%, Field Goals Made, Field Goals Attempted, Free Throws Made,
 Free Throws Attempted, 3-pointers Made, and 3-pointers Attempted. We deemed
 these features safe to remove as they had low weights and the essence of their
-statistic was captured in a different feature. For example, Field Goals Made and
-Field Goals Attempted is captured in the feature Field Goal \% which has a high
-weight. In removing these somewhat redundant features we were able to slightly
+value was captured in a different feature. For example, Field Goals Made and
+Field Goals Attempted is captured in the feature Field Goal \% which had a high
+weight. In removing these somewhat redundant features we hoped to slightly
 improve our predictions.
 
 \subsection{Decision Tree}
@@ -290,6 +304,16 @@ all models trained on the new dataset and the fourth best overall. The score was
 the following hyperparameters: the hidden nodes were set to (32,32), the learning rate was 0.1, 
 momentum was set to 0.8, and we used a regularization value of 0.001.
 
+\subsection{Improvement Results}
+%Maybe this belongs in final results?
+The changes we made with our improvements initially surprised us as the MAE for each model trained 
+on the adjusted dataset was almost identical to, if not slightly higher than, the MAE scores for the models trained on the unaltered 
+dataset with both drafted and undrafted players. Reviewing these results they do match up with the 
+behavior of the models we chose. All of our models, aside from the KNN-Regressor, are capable of learning 
+to ignore unnecessary features. By removing features the linear regressor deemed less useful we most likely only reduced 
+the learning our models needed to do in order to ignore those features.
+Concerning our KNN-Regressor the consistently high MAE was likely due to our data having poor quality of neighbors. This 
+will be discussed further in the Final Resutls section
 
 \section{Final Results}
 
